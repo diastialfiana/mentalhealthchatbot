@@ -9,16 +9,12 @@ from langchain.chains import ConversationalRetrievalChain
 from langchain_community.llms import HuggingFacePipeline
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
 import os
-import pygame
 from gtts import gTTS
 import tempfile
 import re
 import random
 import textwrap
 import pickle
-
-# Inisialisasi pygame mixer
-pygame.mixer.init()
 
 # --- Konfigurasi Halaman ---
 st.set_page_config(page_title="Chatbot Kesehatan Mental", page_icon="💬", layout="wide")
@@ -152,10 +148,9 @@ def text_to_speech(text, language='id'):
 # Fungsi untuk memutar suara
 def play_audio(audio_file):
     try:
-        pygame.mixer.music.load(audio_file)
-        pygame.mixer.music.play()
-        while pygame.mixer.music.get_busy():
-            pygame.time.Clock().tick(10)
+        with open(audio_file, "rb") as file:
+            audio_bytes = file.read()
+            st.audio(audio_bytes, format="audio/mp3")
     except Exception as e:
         st.error(f"Gagal memutar audio: {e}")
 
