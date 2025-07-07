@@ -1,10 +1,9 @@
 streamlit
 streamlit-chat
 langchain
-langchain-huggingface
 langchain-community
-pypdf
-chromadb
-faiss-cpu
 transformers
-ctransformers
+sentence-transformers
+faiss-cpu
+pygame
+gTTS
